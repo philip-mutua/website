@@ -1,17 +1,17 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CustomWatch } from "@/components/CustomWatch";
-import { Montserrat } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 
-const montserrat = Montserrat({
+const outfit = Outfit({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-montserrat',
+  variable: '--font-outfit',
 });
 
 export default function Home() {
   return (
-    <div className={`min-h-screen w-full relative overflow-hidden ${montserrat.variable} font-sans`}>
+    <div className={`min-h-screen w-full relative overflow-hidden ${outfit.variable} font-sans`}>
       {/* Floating Particles/Light Effects */}
       {/* <div className="absolute top-1/4 left-1/4 w-1 h-1 rounded-full bg-white opacity-50 animate-pulse-slow"></div>
       <div className="absolute top-3/4 left-3/4 w-1 h-1 rounded-full bg-white opacity-30 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
@@ -21,13 +21,22 @@ export default function Home() {
       {/* Large Gradient Orbs */}
       {/* <div className="absolute top-[-10%] right-[-5%] w-[30vw] h-[30vw] rounded-full bg-[#2271c3]/20 blur-3xl animate-pulse-slow"></div>
       <div className="absolute bottom-[-15%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#5e2799]/15 blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div> */}
-
+    {/* Header with 2px Margins Left & Right - Placed Outside the Main Wrapper */}
+      <header className="flex justify-between items-center py-2 mt-[57px] mx-[100px]">
+        <div className="text-white text-2xl font-normal m-4">F8bank</div>
+        <Button
+          variant="outline"
+          className="bg-[#00B08F] rounded-full text-[#000000]  border-none px-8 py-6 m-4 hover:bg-[#34A66A] text-black transition-all duration-300 hover:shadow-lg hover:shadow-[#2A915A]/20"
+        >
+          Contact
+        </Button>
+      </header>
       {/* Content Container */}
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
 
         {/* Main Content */}
         <main className="flex flex-col items-center mt-16 md:mt-24 text-center">
-          <h1 className={`text-5xl md:text-6xl font-extrabold text-white mb-0 tracking-tight ${montserrat.className} animate-pulse-slow`}>
+          <h1 className={`text-5xl md:text-6xl font-extrabold text-white mb-0 tracking-tight ${outfit.className} animate-pulse-slow`}>
             Your F8 Awaits...
           </h1>
 
@@ -53,9 +62,9 @@ export default function Home() {
               </div>
               <Button
                 type="submit"
-                className="absolute right-0 h-14 px-8 rounded-full bg-[#2A915A] hover:bg-[#34A66A] text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#2A915A]/20"
+                className="absolute right-0 h-14 px-8 rounded-full bg-[#00B08F] hover:bg-[#34A66A] text-black transition-all duration-300 hover:shadow-lg hover:shadow-[#2A915A]/20"
               >
-                Request Access
+                Sign Up
               </Button>
             </form>
           </div>
