@@ -14,12 +14,20 @@ const outfit = Outfit({
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     // Simulate loading delay
-    const timeout = setTimeout(() => setLoading(false), 1500);
+    const timeout = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timeout);
   }, []);
+
+  const handleRequestAccess = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (email) {
+      window.location.href = `mailto:hello@f8bank.com?subject=Request Access to F8bank&body=I would like to request early access to F8bank. My email address is: ${email}`;
+    }
+  };
 
   return (
     <div className={`min-h-screen w-full relative overflow-hidden ${outfit.variable} font-sans`}>
@@ -33,12 +41,14 @@ export default function Home() {
           {/* Header */}
           <header className="flex flex-row justify-between items-center py-4 mt-6 px-6 sm:px-12 md:px-[100px] w-full">
             <div className="text-white text-3xl sm:text-4xl font-normal">F8bank</div>
-            <Button
-              variant="outline"
-              className="bg-[#00B08F] rounded-full text-[18px] sm:text-[20px] text-[#000000] border-none px-6 sm:px-8 py-4 sm:py-6 hover:bg-[#34A66A] text-black transition-all duration-300 hover:shadow-lg hover:shadow-[#2A915A]/20"
-            >
-              Contact
-            </Button>
+            <a href="mailto:info@f8bank.com?subject=Contact Request">
+              <Button
+                variant="outline"
+                className="bg-[#00B08F] rounded-full text-[18px] sm:text-[20px] text-[#000000] border-none px-6 sm:px-8 py-4 sm:py-6 hover:bg-[#34A66A] text-black transition-all duration-300 hover:shadow-lg hover:shadow-[#2A915A]/20"
+              >
+                Contact
+              </Button>
+            </a>
           </header>
 
           {/* Content Container */}
@@ -56,12 +66,15 @@ export default function Home() {
 
               {/* Email Form */}
               <div className="w-full flex justify-center px-4 sm:mt-10 lg:-mt-[10px]">
-                <form className="relative w-full max-w-[680px] mx-auto">
+                <form className="relative w-full max-w-[680px] mx-auto" onSubmit={handleRequestAccess}>
                   <div className="relative w-full">
                     <Input
                       type="email"
                       placeholder="Enter your email address to request early access"
                       className="bg-[#0D1B2A] border-[#3A506B] text-[18px] sm:text-[20px] text-[#D9D9D9] h-14 rounded-full py-4 sm:py-6 px-4 sm:px-6 w-full shadow-[0_0_10px_rgba(58,80,107,0.3)] focus:ring-2 focus:ring-[#5e2799]/50 transition-all duration-300 placeholder:text-[16px] sm:placeholder:text-[20px] placeholder:pl-4 sm:placeholder:pl-[80px] placeholder:font-extralight placeholder:text-[#B0B0B0]"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                     <Button
                       type="submit"
