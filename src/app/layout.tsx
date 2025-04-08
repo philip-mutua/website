@@ -1,10 +1,10 @@
 import "@/app/globals.css";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Outfit } from "next/font/google";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
+const outfit = Outfit({
+  subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
 });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={montserrat.className}>{children}</body>
+      <body className={outfit.className}>{children}</body>
     </html>
   );
 }
