@@ -2,10 +2,11 @@ import React from 'react';
 
 export function CustomWatch() {
   return (
-    <div className="relative w-[100%] h-[100%]">
+    <div className="relative w-full h-full flex justify-center items-center">
       {/* The Watch Screen */}
-      <div className="margin-top-[0px]">
-            <img alt="watch image" src="images/freepik__background__42092 1.png"></img>
+      <div className="mt-0">
+        {/* Replace with correct image path if needed */}
+        <img alt="watch image" src="/images/freepik__background__42092 1.png" className="w-auto h-auto" />
       </div>
 
       {/* Pulsing Glow Behind the Watch */}

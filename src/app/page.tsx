@@ -18,11 +18,11 @@ export default function Home() {
 
   useEffect(() => {
     // Simulate loading delay
-    const timeout = setTimeout(() => setLoading(false), 1500);
+    const timeout = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleRequestAccess = (e) => {
+  const handleRequestAccess = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email) {
       window.location.href = `mailto:hello@f8bank.com?subject=Request Access to F8bank&body=I would like to request early access to F8bank. My email address is: ${email}`;
