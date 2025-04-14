@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react"
 import { Outfit } from "next/font/google";
 
 const outfit = Outfit({
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={outfit.className}>{children}</body>
+      <body className={outfit.className}>{children}<Analytics /></body>
     </html>
   );
 }
