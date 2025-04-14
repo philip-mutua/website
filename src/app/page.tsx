@@ -127,7 +127,7 @@ export default function Home() {
           {/* Header */}
           <header className="flex flex-row justify-between items-center py-4 mt-6 px-6 sm:px-12 md:px-[100px] w-full">
             <div className="text-white text-3xl sm:text-4xl font-normal">F8bank</div>
-            <a href="mailto:info@f8bank.com?subject=Contact Request">
+            <a href="mailto:hello@f8bank.com?subject=Contact Request">
               <Button
                 variant="outline"
                 className="bg-[#00B08F] rounded-full text-[18px] sm:text-[20px] text-[#000000] border-none px-6 sm:px-8 py-4 sm:py-6 hover:bg-[#34A66A] text-black transition-all duration-300 hover:shadow-lg hover:shadow-[#2A915A]/20"
