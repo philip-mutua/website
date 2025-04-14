@@ -42,7 +42,7 @@ export default function Home() {
   
     try {
       // Changed from HTTP to HTTPS
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
