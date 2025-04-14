@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CustomWatch } from "@/components/CustomWatch";
 import { Outfit } from "next/font/google";
+import { CheckCircle, XCircle, X } from "lucide-react";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -15,6 +16,11 @@ const outfit = Outfit({
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+    type: "success" // success or error
+  });
 
   useEffect(() => {
     // Simulate loading delay
@@ -29,8 +35,88 @@ export default function Home() {
     }
   };
 
+  const handleEmailRequestAccess = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  
+    if (!email) return;
+  
+    try {
+      // Changed from HTTP to HTTPS
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to send email");
+      }
+      
+      // Show success notification
+      setNotification({
+        show: true,
+        message: "Success! Please check your email.",
+        type: "success"
+      });
+      
+      setEmail(""); // clear input
+      
+      // Hide notification after 5 seconds
+      setTimeout(() => {
+        setNotification(prev => ({ ...prev, show: false }));
+      }, 5000);
+    } catch (error) {
+      console.error("Error:", error);
+      
+      // Show error notification
+      setNotification({
+        show: true,
+        message: "Something went wrong. Please try again later.",
+        type: "error"
+      });
+      
+      // Hide notification after 5 seconds
+      setTimeout(() => {
+        setNotification(prev => ({ ...prev, show: false }));
+      }, 5000);
+    }
+  };
+
+  const closeNotification = () => {
+    setNotification(prev => ({ ...prev, show: false }));
+  };
+
   return (
     <div className={`min-h-screen w-full relative overflow-hidden ${outfit.variable} font-sans`}>
+      {/* Notification */}
+      {notification.show && (
+        <div 
+          className={`fixed top-6 right-6 z-50 rounded-lg shadow-lg flex items-center p-4 pr-10 transition-all duration-300 max-w-md ${
+            notification.type === "success" 
+              ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white" 
+              : "bg-gradient-to-r from-red-500 to-rose-500 text-white"
+          }`}
+        >
+          <div className="mr-3">
+            {notification.type === "success" ? (
+              <CheckCircle className="w-6 h-6" />
+            ) : (
+              <XCircle className="w-6 h-6" />
+            )}
+          </div>
+          <p className="text-sm font-medium">{notification.message}</p>
+          <button 
+            onClick={closeNotification}
+            className="absolute top-4 right-3 text-white hover:text-gray-200 transition-colors"
+            aria-label="Close notification"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+      )}
+      
       {/* Loader */}
       {loading ? (
         <div className="flex items-center justify-center h-screen bg-[#0D1B2A]">
@@ -66,7 +152,7 @@ export default function Home() {
 
               {/* Email Form */}
               <div className="w-full flex justify-center px-4 sm:mt-10 lg:-mt-[10px]">
-                <form className="relative w-full max-w-[680px] mx-auto" onSubmit={handleRequestAccess}>
+                <form className="relative w-full max-w-[680px] mx-auto" onSubmit={handleEmailRequestAccess}>
                   <div className="relative w-full">
                     <Input
                       type="email"
